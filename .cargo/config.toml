@@ -1,0 +1,6 @@
+# Cargo-native task entrypoints (no shell wrappers).
+#
+# Coverage: install `cargo-llvm-cov` (`cargo install cargo-llvm-cov`). If `llvm-tools-preview`
+# is unavailable, set `LLVM_COV` and `LLVM_PROFDATA` (see README).
+[alias]
+cov = "llvm-cov test --all-targets --fail-under-lines 80"

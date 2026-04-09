@@ -1,0 +1,59 @@
+[package]
+name = "pub-sub-pipeline"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Tokio pub/sub event bus, bounded pipeline stages, and pubsub CLI"
+license = "MIT"
+repository = "https://github.com/ml-lubich/pub-sub-pipeline"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive", "cargo", "wrap_help"] }
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+# Prefer minimal features over `full`: smaller dependency surface, clearer intent.
+tokio = { version = "1.43", features = [
+    "io-std",
+    "io-util",
+    "macros",
+    "rt-multi-thread",
+    "sync",
+    "time",
+] }
+tokio-util = { version = "0.7", default-features = false, features = ["rt"] }
+
+[dev-dependencies]
+assert_cmd = "2"
+predicates = "3"
+tokio = { version = "1.43", features = [
+    "io-std",
+    "io-util",
+    "macros",
+    "rt-multi-thread",
+    "sync",
+    "time",
+    "test-util",
+] }
+
+[lib]
+name = "pub_sub_pipeline"
+path = "src/lib.rs"
+
+[[bin]]
+name = "pubsub"
+path = "src/main.rs"
+
+[[example]]
+name = "demo"
+path = "examples/demo.rs"
+
+[lints.rust]
+unsafe_code = "forbid"
+unused_qualifications = "warn"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+module_name_repetitions = "allow"
+missing_errors_doc = "allow"
