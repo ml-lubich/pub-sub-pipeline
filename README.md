@@ -13,6 +13,7 @@ Includes the **`pubsub` CLI** (ASCII banner, Clap help, optional `tracing` via `
 - [Quick start](#quick-start)
 - [Testing](#testing)
 - [License](#license)
+- [🗺️ Repository map](#️-repository-map)
 
 ## Pipeline sequence
 
@@ -150,3 +151,29 @@ cargo --locked clippy --all-targets -- -D warnings
 ## License
 
 MIT — see `Cargo.toml`.
+
+
+## 🗺️ Repository map
+
+Top-level layout of `pub-sub-pipeline` rendered as a Mermaid mindmap (auto-generated from the on-disk tree).
+
+```mermaid
+mindmap
+  root((pub-sub-pipeline))
+    examples/
+      demo.rs
+    src/
+      art.rs
+      bus.rs
+      error.rs
+      lib.rs
+      main.rs
+      pipeline.rs
+    tests/
+      cli_e2e.rs
+      coverage_hotspots.rs
+      integration.rs
+      scenarios.rs
+    files
+      README.md
+```
