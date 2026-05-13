@@ -4,6 +4,14 @@ Async **pub/sub** (multi-topic fan-out via Tokio `broadcast`) plus **bounded `mp
 
 Includes the **`pubsub` CLI** (ASCII banner, Clap help, optional `tracing` via `--verbose`) and **end-to-end CLI tests**.
 
+## Table of contents
+
+- [Architecture](#architecture)
+- [Requirements](#requirements)
+- [Quick start](#quick-start)
+- [Testing](#testing)
+- [License](#license)
+
 ## Architecture
 
 ```mermaid
