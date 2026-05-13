@@ -7,10 +7,52 @@ Includes the **`pubsub` CLI** (ASCII banner, Clap help, optional `tracing` via `
 ## Table of contents
 
 - [Architecture](#architecture)
+- [Pipeline sequence](#pipeline-sequence)
+- [Cooperative shutdown (algorithm)](#cooperative-shutdown-algorithm)
 - [Requirements](#requirements)
 - [Quick start](#quick-start)
 - [Testing](#testing)
 - [License](#license)
+
+## Pipeline sequence
+
+```mermaid
+sequenceDiagram
+    participant Pub as Publisher
+    participant Bus as broadcast Topic
+    participant S1 as Subscriber A
+    participant S2 as Subscriber B
+    participant Pipe as bounded mpsc
+    participant Sink as merge / sink
+
+    Pub->>Bus: send(message M)
+    Bus-->>S1: clone(M)
+    Bus-->>S2: clone(M)
+    S1->>Pipe: parse → send
+    S2->>Pipe: parse → send
+    Note over Pipe: backpressure when buffer full
+    Pipe->>Sink: square / merge
+    Sink-->>Pub: stdout
+```
+
+## Cooperative shutdown (algorithm)
+
+```mermaid
+flowchart LR
+    A([CancellationToken issued])
+    B["per stage:<br/>tokio::select!"]
+    C{"recv ready?"}
+    D["process item"]
+    E{"token cancelled?"}
+    F["drop receiver<br/>flush in-flight"]
+    G["join stage handle"]
+    Z([clean exit])
+    A --> B --> C
+    C -- yes --> D --> B
+    C -- no  --> E
+    E -- yes --> F --> G --> Z
+    E -- no  --> B
+```
 
 ## Architecture
 
