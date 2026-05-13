@@ -14,6 +14,7 @@ Includes the **`pubsub` CLI** (ASCII banner, Clap help, optional `tracing` via `
 - [Testing](#testing)
 - [License](#license)
 - [🗺️ Repository map](#️-repository-map)
+- [📊 Code composition](#-code-composition)
 
 ## Pipeline sequence
 
@@ -176,4 +177,16 @@ mindmap
       scenarios.rs
     files
       README.md
+```
+
+
+## 📊 Code composition
+
+File-type breakdown of source under this repo (skips `.git`, `node_modules`, build caches, lockfiles).
+
+```mermaid
+pie showData title File-type composition of pub-sub-pipeline (15 files)
+    "Rust" : 12
+    "TOML" : 2
+    "Markdown" : 1
 ```
